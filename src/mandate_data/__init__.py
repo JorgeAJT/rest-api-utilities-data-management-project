@@ -1,2 +1,4 @@
 from .mandate_data_get import mandate_data_get_router
 from .mandate_data_post import mandate_data_post_router
+from .mandate_data_put import mandate_data_put_router
+from .mandate_data_delete import mandate_data_delete_router
