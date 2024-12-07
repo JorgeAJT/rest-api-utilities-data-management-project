@@ -15,16 +15,18 @@ try:
         try:
             cursor.execute('SELECT * FROM mandate_data WHERE business_partner_id = %s', (business_partner_id,))
             value = cursor.fetchall()
+
+            if not value:
+                logger.warning(f"No data found for business_partner_id: {business_partner_id}")
+                return Response(status_code=404, message="business_partner_id not found in any mandate_data row")
+
+            logger.info(f"Data successfully retrieved for business_partner_id: {business_partner_id}")
+            return Response(status_code=200, message={"mandate_data": value})
         except Exception as e:
             logger.error(f"Error executing query: {e}")
-            value = None
+            return Response(status_code=500, message="An internal error occurred while GET query in mandate_data")
         finally:
             cursor.close()
-
-        if value:
-            return Response(status_code=200, message={"mandate_data": value})
-        else:
-            return Response(status_code=404, message="business_partner_id not found in any mandate_data row")
 
     @mandate_data_get_router.get('/mandate_data/', response_model=Response)
     async def get_mandate_data_by_query_params(
@@ -38,25 +40,23 @@ try:
                          'collection_frequency = %s')
                 params = (business_partner_id, mandate_status, collection_frequency)
             else:
-                query = ('SELECT * FROM mandate_data WHERE business_partner_id = %s AND mandate_status = %s')
+                query = 'SELECT * FROM mandate_data WHERE business_partner_id = %s AND mandate_status = %s'
                 params = (business_partner_id, mandate_status)
             cursor.execute(query, params)
             value = cursor.fetchall()
+
+            if not value:
+                logger.warning(f"No data found for business_partner_id: {business_partner_id}")
+                return Response(status_code=404, message="mandate_data row not found")
+
+            logger.info(f"Data successfully retrieved")
+            return Response(status_code=200, message={"mandate_data": value})
         except Exception as e:
             logger.error(f"Error executing query: {e}")
-            value = None
+            return Response(status_code=500, message="An internal error occurred while GET query in mandate_data")
         finally:
             cursor.close()
-
-        if value:
-            return Response(status_code=200, message={"mandate_data": value})
-        else:
-            return Response(status_code=404, message="mandate_data row not found")
 
 except Exception as e:
     logger.error(f"Error: {e}")
     raise e
-
-
-
-

@@ -21,6 +21,7 @@ try:
                 ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """, values_tuple)
             conn.commit()
+            logger.info(f"Successfully inserted into mandate_data: {mandate_data.dict()}")
             return Response(status_code=201, message={"mandate_data": mandate_data.dict()})
         except Exception as e:
             logger.error(f"Error executing query: {e}")
@@ -31,4 +32,3 @@ try:
 except Exception as e:
     logger.error(f"Error: {e}")
     raise e
-
