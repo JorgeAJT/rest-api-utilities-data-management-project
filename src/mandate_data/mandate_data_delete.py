@@ -8,9 +8,9 @@ mandate_data_delete_router = APIRouter()
 
 @mandate_data_delete_router.delete('/mandate_data/{mandate_id}', response_model=Response)
 async def delete_mandate_data(mandate_id: int):
-    with db_connection() as conn:
-        with conn.cursor() as cursor:
-            try:
+    try:
+        with db_connection() as conn:
+            with conn.cursor() as cursor:
                 cursor.execute('SELECT * FROM mandate_data WHERE mandate_id = %s', (mandate_id,))
                 value = cursor.fetchone()
 
@@ -23,6 +23,6 @@ async def delete_mandate_data(mandate_id: int):
                 logger.info(f"mandate_data row with mandate_id {mandate_id} deleted successfully")
                 return Response(status_code=200,
                                 message=f"mandate_data row with mandate_id {mandate_id} deleted successfully")
-            except Exception as e:
-                logger.error(f"Error executing query: {e}")
-                return Response(status_code=500, message="An internal error occurred while deleting mandate_data")
+    except Exception as e:
+        logger.error(f"An error occurred: {e}")
+        return Response(status_code=500, message="An internal error occurred while processing the request")
