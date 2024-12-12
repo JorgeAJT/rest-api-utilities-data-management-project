@@ -44,7 +44,7 @@ async def get_mandate_data_by_query_params(
                 value = cursor.fetchall()
 
                 if not value:
-                    logger.warning(f"No data found for business_partner_id: {business_partner_id}")
+                    logger.warning(f"No data found for this request")
                     return Response(status_code=404, message="mandate_data row not found")
 
                 logger.info(f"Data successfully retrieved")

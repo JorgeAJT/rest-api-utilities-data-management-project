@@ -2,7 +2,7 @@ from fastapi import APIRouter
 from src.utils import setup_logger, db_connection
 from src.models import Response, MandateData
 
-logger = setup_logger("mandate-data-post")
+logger = setup_logger('mandate-data-post')
 
 mandate_data_post_router = APIRouter()
 
