@@ -26,7 +26,7 @@ async def get_mandate_data_by_path_params(business_partner_id: str):
         return Response(status_code=500, message="An internal error occurred while processing the request")
 
 @mandate_data_get_router.get('/mandate_data/', response_model=Response)
-async def get_mandate_data_by_query_params(
+async def get_mandate_data_by_some_query_params(
         business_partner_id: str,
         mandate_status: str,
         collection_frequency: str = None):

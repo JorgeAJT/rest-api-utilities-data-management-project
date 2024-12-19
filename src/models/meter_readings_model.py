@@ -10,9 +10,9 @@ class MeterReadingsRequest(BaseModel):
     brand: BrandEnum
     energy_type: EnergyTypeEnum
     reading_date: date
-    reading_electricity: str
-    reading_gas: str
-    rejection: str
+    reading_electricity: str | None
+    reading_gas: str | None
+    rejection: str | None
     validation_status: str
 
 class MeterReadingsResponse(BaseModel):
@@ -23,7 +23,7 @@ class MeterReadingsResponse(BaseModel):
     brand: BrandEnum
     energy_type: EnergyTypeEnum
     reading_date: date
-    reading_electricity: str
-    reading_gas: str
-    rejection: str
+    reading_electricity: str | None
+    reading_gas: str | None
+    rejection: str | None
     validation_status: str

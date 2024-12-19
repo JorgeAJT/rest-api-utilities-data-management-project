@@ -14,7 +14,7 @@ async def post_meter_data(meter_data_request: MeterDataRequest):
                 values_tuple = tuple(meter_data_request.dict().values())
                 cursor.execute("""
                     INSERT INTO meter_data (
-                        meter_number, connection_ean_code,business_partner_id, brand, grid_company_code,
+                        meter_number, connection_ean_code, business_partner_id, brand, grid_company_code,
                         oda_code, smart_collectable, sjv1, sjv2, installation, division,
                         move_out_date, row_create_datetime, move_in_date
                     ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
