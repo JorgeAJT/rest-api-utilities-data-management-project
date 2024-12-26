@@ -1,6 +1,9 @@
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel
+
 from .brand_enum_model import BrandEnum
+
 
 class MeterDataRequest(BaseModel):
     meter_number: str
@@ -17,6 +20,7 @@ class MeterDataRequest(BaseModel):
     move_out_date: datetime
     row_create_datetime: datetime
     move_in_date: datetime
+
 
 class MeterDataResponse(BaseModel):
     meter_data_id: int

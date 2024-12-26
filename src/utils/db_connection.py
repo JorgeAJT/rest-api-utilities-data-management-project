@@ -1,7 +1,9 @@
 import psycopg2
+
 from .logger import setup_logger
 
 logger = setup_logger("database")
+
 
 def db_connection() -> psycopg2.extensions.connection:
     try:

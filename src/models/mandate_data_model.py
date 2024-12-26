@@ -1,6 +1,9 @@
-from pydantic import BaseModel
 from datetime import datetime
+
+from pydantic import BaseModel
+
 from .brand_enum_model import BrandEnum
+
 
 class MandateData(BaseModel):
     mandate_id: int

@@ -1,5 +1,6 @@
 from enum import Enum
 
+
 class BrandEnum(str, Enum):
     brand1 = "ESSENT"
     brand2 = "ENERGIEDIRECT"

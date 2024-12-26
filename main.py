@@ -1,5 +1,6 @@
 import uvicorn
 from fastapi import FastAPI
+
 from src import api_router
 
 app = FastAPI(title="rest-api-final-project")
