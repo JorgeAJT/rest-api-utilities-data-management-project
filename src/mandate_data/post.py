@@ -1,13 +1,15 @@
 from fastapi import APIRouter
-from src.utils import setup_logger, db_connection
+
 from src.models import Response, MandateData
+from src.utils import setup_logger, db_connection
 
 logger = setup_logger('mandate-data-post')
 
 mandate_data_post_router = APIRouter()
 
-@mandate_data_post_router.post('/mandate_data/', response_model=Response)
-async def post_mandate_data(mandate_data: MandateData):
+
+@mandate_data_post_router.post('/mandate_data/')
+async def post_mandate_data(mandate_data: MandateData) -> Response:
     try:
         with db_connection() as conn:
             with conn.cursor() as cursor:

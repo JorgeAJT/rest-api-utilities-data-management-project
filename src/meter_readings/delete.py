@@ -1,13 +1,15 @@
 from fastapi import APIRouter
-from src.utils import setup_logger, db_connection
+
 from src.models import Response
+from src.utils import setup_logger, db_connection
 
 logger = setup_logger('meter-readings-delete')
 
 meter_readings_delete_router = APIRouter()
 
-@meter_readings_delete_router.delete('/meter_readings/{meter_readings_id}', response_model=Response)
-async def delete_meter_readings(meter_readings_id: int):
+
+@meter_readings_delete_router.delete('/meter_readings/{meter_readings_id}')
+async def delete_meter_readings(meter_readings_id: int) -> Response:
     try:
         with db_connection() as conn:
             with conn.cursor() as cursor:

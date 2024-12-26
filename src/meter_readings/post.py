@@ -1,13 +1,15 @@
 from fastapi import APIRouter
-from src.utils import setup_logger, db_connection
+
 from src.models import Response, MeterReadingsResponse, MeterReadingsRequest
+from src.utils import setup_logger, db_connection
 
 logger = setup_logger('meter-readings-post')
 
 meter_readings_post_router = APIRouter()
 
-@meter_readings_post_router.post('/meter_readings/', response_model=Response)
-async def post_meter_readings(meter_readings_request: MeterReadingsRequest):
+
+@meter_readings_post_router.post('/meter_readings/')
+async def post_meter_readings(meter_readings_request: MeterReadingsRequest) -> Response:
     try:
         with db_connection() as conn:
             with conn.cursor() as cursor:
@@ -21,7 +23,8 @@ async def post_meter_readings(meter_readings_request: MeterReadingsRequest):
                 """, values_tuple)
                 new_id = cursor.fetchone()[0]
                 conn.commit()
-                meter_readings_response = MeterReadingsResponse(meter_readings_id=new_id, **meter_readings_request.dict())
+                meter_readings_response = MeterReadingsResponse(meter_readings_id=new_id,
+                                                                **meter_readings_request.dict())
                 logger.info(f"Successfully inserted into meter_readings: {meter_readings_response.dict()}")
                 return Response(status_code=201, message={"meter_readings": meter_readings_response.dict()})
     except Exception as e:
