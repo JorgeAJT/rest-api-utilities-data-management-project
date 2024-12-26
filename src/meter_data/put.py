@@ -1,16 +1,25 @@
 from fastapi import APIRouter
-from src.utils import setup_logger, db_connection
+
 from src.models import Response, MeterDataResponse, MeterDataRequest
+from src.utils import setup_logger, db_connection
 
 logger = setup_logger('meter-data-put')
 
 meter_data_put_router = APIRouter()
 
-@meter_data_put_router.put('/meter_data/{meter_data_id}', response_model=Response)
-async def put_meter_data(meter_data_id: int, meter_data_request: MeterDataRequest):
+
+@meter_data_put_router.put('/meter_data/{meter_data_id}')
+async def put_meter_data(meter_data_id: int, meter_data_request: MeterDataRequest) -> Response:
     try:
         with db_connection() as conn:
             with conn.cursor() as cursor:
+                cursor.execute('SELECT * FROM meter_data WHERE meter_data_id = %s', (meter_data_id,))
+                value = cursor.fetchone()
+
+                if not value:
+                    logger.warning(f"No data found for meter_data_id: {meter_data_id}")
+                    return Response(status_code=404, message="meter_data_id not found in any meter_data row")
+
                 values_tuple = tuple(meter_data_request.dict().values()) + (meter_data_id,)
                 cursor.execute("""
                     UPDATE meter_data 
