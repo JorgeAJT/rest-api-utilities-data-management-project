@@ -1,7 +1,11 @@
-from pydantic import BaseModel
 from datetime import date
+from typing import Optional
+
+from pydantic import BaseModel, Field
+
 from .brand_enum_model import BrandEnum
 from .energy_type_enum import EnergyTypeEnum
+
 
 class MeterReadingsRequest(BaseModel):
     meter_number: str
@@ -10,10 +14,11 @@ class MeterReadingsRequest(BaseModel):
     brand: BrandEnum
     energy_type: EnergyTypeEnum
     reading_date: date
-    reading_electricity: str | None
-    reading_gas: str | None
-    rejection: str | None
+    reading_electricity: Optional[str] = Field(default=None)
+    reading_gas: Optional[str] = Field(default=None)
+    rejection: Optional[str] = Field(default=None)
     validation_status: str
+
 
 class MeterReadingsResponse(BaseModel):
     meter_readings_id: int
@@ -23,7 +28,7 @@ class MeterReadingsResponse(BaseModel):
     brand: BrandEnum
     energy_type: EnergyTypeEnum
     reading_date: date
-    reading_electricity: str | None
-    reading_gas: str | None
-    rejection: str | None
+    reading_electricity: Optional[str] = Field(default=None)
+    reading_gas: Optional[str] = Field(default=None)
+    rejection: Optional[str] = Field(default=None)
     validation_status: str
