@@ -2,7 +2,7 @@ from datetime import datetime
 
 from pydantic import BaseModel
 
-from .brand_enum_model import BrandEnum
+from .brand_enum import BrandEnum
 
 
 class MandateData(BaseModel):

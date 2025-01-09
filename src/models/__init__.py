@@ -1,4 +1,4 @@
-from .brand_enum_model import BrandEnum
+from .brand_enum import BrandEnum
 from .energy_type_enum import EnergyTypeEnum
 from .mandate_data_model import MandateData
 from .meter_data_model import MeterDataRequest, MeterDataResponse

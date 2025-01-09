@@ -3,7 +3,7 @@ from typing import Optional
 
 from pydantic import BaseModel, Field
 
-from .brand_enum_model import BrandEnum
+from .brand_enum import BrandEnum
 from .energy_type_enum import EnergyTypeEnum
 
 
