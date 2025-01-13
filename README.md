@@ -138,7 +138,8 @@ Key files:
 2. From the project’s root directory, run:
     ```bash
     python main.py
-  By default, the server will start on port **8080**.
+    ```
+    By default, the server will start on port **8080**.
 3. Open your browser or any HTTP client (like Postman) and go to:
   ```bash
   http://localhost:8080
