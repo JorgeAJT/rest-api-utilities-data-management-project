@@ -135,11 +135,13 @@ Key files:
 ## Running the Project
 
 1. Ensure your PostgreSQL database is **running** (locally or via Docker).
+   
 2. From the project’s root directory, run:
     ```bash
     python main.py
     ```
     By default, the server will start on port **8080**.
+   
 3. Open your browser or any HTTP client (like Postman) and go to:
     ```bash
     http://localhost:8080
