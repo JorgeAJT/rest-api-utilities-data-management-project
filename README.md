@@ -5,16 +5,26 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
 ## Table of Contents
 
 1. [Overview](#overview)
+
 2. [Technologies](#technologies)
+
 3. [Project Structure](#project-structure)
+
 4. [Prerequisites](#prerequisites)
+
 5. [Installation](#installation)
+
 6. [Running the Project](#running-the-project)
+
 7. [API Usage (Endpoints)](#api-usage-endpoints)
+
     - [Meter Readings](#meter-readings)
-    - Meter Data
-    - Mandate Data
-9. Contributions
+      
+    - [Meter Data](#meter-data)
+      
+    - [Mandate Data](#mandate-data)
+      
+8. [Contributions](#contrubitions)
 
 ## Overview
 This project provides a **REST API** to manage data for three main database tables:
