@@ -140,9 +140,9 @@ Key files:
     python main.py
   By default, the server will start on port **8080**.
 3. Open your browser or any HTTP client (like Postman) and go to:
-    ```arduino
-    http://localhost:8080
-    ```
+  ```bash
+  http://localhost:8080
+  ```
   FastAPI’s interactive docs are at:
   ```bash
   http://localhost:8080/docs
