@@ -11,8 +11,8 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
 5. Installation
 6. Running the Project
 7. API Usage (Endpoints)
-  - Meter Readings
-  - Meter Data
+- Meter Readings
+- Meter Data
   - Mandate Data
 8. Contributions
 
