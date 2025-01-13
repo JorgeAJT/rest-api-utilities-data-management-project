@@ -141,17 +141,17 @@ Key files:
     ```
     By default, the server will start on port **8080**.
 3. Open your browser or any HTTP client (like Postman) and go to:
-  ```bash
-  http://localhost:8080
-  ```
-  FastAPI’s interactive docs are at:
-  ```bash
-  http://localhost:8080/docs
-  ```
-  or
-  ```bash
-  http://localhost:8080/redoc
-  ```
+    ```bash
+    http://localhost:8080
+    ```
+    FastAPI’s interactive docs are at:
+    ```bash
+    http://localhost:8080/docs
+    ```
+    or
+    ```bash
+    http://localhost:8080/redoc
+    ```
 
 ## API Usage (Endpoints)
 All endpoints return a JSON with a `status_code` and `message` (which can contain data or error details).
