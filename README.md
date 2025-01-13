@@ -4,7 +4,7 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
 
 ## Table of Contents
 
-1. Overview
+1. [Overview](#overview)
 2. Technologies
 3. Project Structure
 4. Prerequisites
