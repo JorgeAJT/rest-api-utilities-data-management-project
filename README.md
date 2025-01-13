@@ -19,11 +19,12 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
 ## Overview
 This project provides a **REST API** to manage data for three main database tables:
 
-- meter_readings
-- meter_data
-- mandate_data
+- **meter_readings**
+- **meter_data**
+- **mandate_data**
 
 It includes CRUD operations (**C**reate, **R**ead, **U**pdate, **D**elete) for each table.
+
 The API is built with **FastAPI** and organized into different routers for each table. This modular approach keeps the codebase maintainable and scalable.
 
 ## Technologies
