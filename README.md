@@ -171,16 +171,21 @@ All endpoints return a JSON with a `status_code` and `message` (which can contai
       - Filters by `account_id`, `connection_ean_code`, or both.
 
 2. **POST**
-  - `POST /meter_readings/`
-    - Creates a new record in `meter_readings`.
-    - Expects a JSON body matching `MeterReadingsRequest`.
+    - `POST /meter_readings/`
+
+      - Creates a new record in `meter_readings`.
+      - Expects a JSON body matching `MeterReadingsRequest`.
+
 3. **PUT**
-  - `PUT /meter_readings/{meter_readings_id}`
-    - Updates an existing record identified by `meter_readings_id`.
-    - Expects a JSON body matching `MeterReadingsRequest`.
+    - `PUT /meter_readings/{meter_readings_id}`
+      
+      - Updates an existing record identified by `meter_readings_id`.
+      - Expects a JSON body matching `MeterReadingsRequest`.
+        
 4. **DELETE**
-  - `DELETE /meter_readings/{meter_readings_id}`
-    - Deletes the record identified by `meter_readings_id`.
+    - `DELETE /meter_readings/{meter_readings_id}`
+      
+      - Deletes the record identified by `meter_readings_id`.
 
 ###Meter Data
 1. **GET**
