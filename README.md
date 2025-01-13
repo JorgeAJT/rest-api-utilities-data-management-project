@@ -164,10 +164,12 @@ All endpoints return a JSON with a `status_code` and `message` (which can contai
 
 ### Meter Readings
 1. **GET**
+    
     - `GET /meter_readings/{connection_ean_code}`
       - Retrieves meter readings filtered by `connection_ean_code`.
     - `GET /meter_readings/?account_id={account_id}&connection_ean_code={connection_ean_code}`
       - Filters by `account_id`, `connection_ean_code`, or both.
+
 2. **POST**
   - `POST /meter_readings/`
     - Creates a new record in `meter_readings`.
