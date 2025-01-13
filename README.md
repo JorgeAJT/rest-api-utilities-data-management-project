@@ -26,6 +26,8 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
       
 8. [Contributions](#contributions)
 
+9. [Author](#author)
+
 ## Overview
 This project provides a **REST API** to manage data for three main database tables:
 
@@ -276,4 +278,4 @@ Contributions are welcome! To contribute:
 
 ## Author
 
-Jorge Jiménez - JorgeAJT
+:man_technologist: Jorge Jiménez - JorgeAJT
