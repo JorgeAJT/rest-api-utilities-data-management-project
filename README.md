@@ -176,63 +176,59 @@ All endpoints return a JSON with a `status_code` and `message` (which can contai
   - `DELETE /meter_readings/{meter_readings_id}`
     - Deletes the record identified by `meter_readings_id`.
 
-Meter Data
-1. GET
+###Meter Data
+1. **GET**
+  - `GET /meter_data/{connection_ean_code}`
+    - Retrieves meter data by `connection_ean_code`.
+  - `GET /meter_data/?business_partner_id={business_partner_id}&connection_ean_code={connection_ean_code}`
+    - Filters by `business_partner_id`, `connection_ean_code`, or both.
+2. **POST**
+  - `POST /meter_data/`
+    - Inserts a new record into `meter_data`.
+    - Expects a JSON body matching `MeterDataRequest`.
+3. **PUT**
+  - `PUT /meter_data/{meter_data_id}`
+    - Updates an existing record identified by `meter_data_id`.
+    - Expects a JSON body matching `MeterDataRequest`.
+4. **DELETE**
+  - `DELETE /meter_data/{meter_data_id}`
+    - Deletes the record identified by `meter_data_id`.
 
-GET /meter_data/{connection_ean_code}
-Retrieves meter data by connection_ean_code.
-GET /meter_data/?business_partner_id={business_partner_id}&connection_ean_code={connection_ean_code}
-Filters by business_partner_id, connection_ean_code, or both.
-2. POST
+### Mandate Data
+1. **GET**
+  - `GET /mandate_data/{business_partner_id}`
+    - Retrieves mandate data by `business_partner_id`.
+  - `GET /mandate_data/?business_partner_id={business_partner_id}&mandate_status={mandate_status}&collection_frequency={collection_frequency}`
+    - Filters by `business_partner_id`, `mandate_status`, and optionally by `collection_frequency`.
+2. **POST**
+  - `POST /mandate_data/`
+    - Creates a new record in `mandate_data`.
+    - **Important**: `mandate_id` is **not** auto-generated. You must provide it in the request body.
+3. **PUT**
+  - `PUT /mandate_data/{mandate_id}`
+    - Updates an existing record identified by `mandate_id`.
+    - Also requires `mandate_id` in the `MandateData` object for consistency.
+4. **DELETE**
+  - `DELETE /mandate_data/{mandate_id}`
+    - Deletes the record identified by `mandate_id`.
 
-POST /meter_data/
-Inserts a new record into meter_data.
-Expects a JSON body matching MeterDataRequest.
-3. PUT
+## Contributing
 
-PUT /meter_data/{meter_data_id}
-Updates an existing record identified by meter_data_id.
-Expects a JSON body matching MeterDataRequest.
-4. DELETE
-
-DELETE /meter_data/{meter_data_id}
-Deletes the record identified by meter_data_id.
-Mandate Data
-1. GET
-
-GET /mandate_data/{business_partner_id}
-Retrieves mandate data by business_partner_id.
-GET /mandate_data/?business_partner_id={business_partner_id}&mandate_status={mandate_status}&collection_frequency={collection_frequency}
-Filters by business_partner_id, mandate_status, and optionally by collection_frequency.
-2. POST
-
-POST /mandate_data/
-Creates a new record in mandate_data.
-Important: mandate_id is not auto-generated. You must provide it in the request body.
-3. PUT
-
-PUT /mandate_data/{mandate_id}
-Updates an existing record identified by mandate_id.
-Also requires mandate_id in the MandateData object for consistency.
-4. DELETE
-
-DELETE /mandate_data/{mandate_id}
-Deletes the record identified by mandate_id.
-Contributing
 Contributions are welcome! To contribute:
 
-Fork this repository.
-Create a new branch for your feature or fix:
-bash
-Copiar código
-git checkout -b feature/new-feature
-Make your changes and commit with descriptive messages:
-bash
-Copiar código
-git commit -m "Add new feature X"
-Push the branch to your forked repo:
-bash
-Copiar código
-git push origin feature/new-feature
-Create a Pull Request to the main branch of this repository.
-Wait for maintainers to review and provide feedback.
+1. Fork this repository.
+2. Create a new branch for your feature or fix:
+    ```bash
+    git checkout -b feature/new-feature
+3. Make your changes and commit with descriptive messages:
+    ```bash
+    git commit -m "Add new feature X"
+4. Push the branch to your forked repository:
+    ```bash
+    git push origin feature/new-feature
+5. Create a Pull Request to the main branch of this repository.
+6. Wait for maintainers to review and provide feedback.
+
+## Author
+
+Jorge Jiménez - JorgeAJT
