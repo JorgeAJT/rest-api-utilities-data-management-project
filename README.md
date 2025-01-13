@@ -189,23 +189,31 @@ All endpoints return a JSON with a `status_code` and `message` (which can contai
       
       - Deletes the record identified by `meter_readings_id`.
 
-###Meter Data
+### Meter Data
 1. **GET**
-  - `GET /meter_data/{connection_ean_code}`
-    - Retrieves meter data by `connection_ean_code`.
-  - `GET /meter_data/?business_partner_id={business_partner_id}&connection_ean_code={connection_ean_code}`
-    - Filters by `business_partner_id`, `connection_ean_code`, or both.
+    - `GET /meter_data/{connection_ean_code}`
+      
+      - Retrieves meter data by `connection_ean_code`.
+    - `GET /meter_data/?business_partner_id={business_partner_id}&connection_ean_code={connection_ean_code}`
+      - Filters by `business_partner_id`, `connection_ean_code`, or both.
+        
 2. **POST**
-  - `POST /meter_data/`
-    - Inserts a new record into `meter_data`.
-    - Expects a JSON body matching `MeterDataRequest`.
+    - `POST /meter_data/`
+      
+      - Inserts a new record into `meter_data`.
+        
+      - Expects a JSON body matching `MeterDataRequest`.
+        
 3. **PUT**
-  - `PUT /meter_data/{meter_data_id}`
-    - Updates an existing record identified by `meter_data_id`.
-    - Expects a JSON body matching `MeterDataRequest`.
+    - `PUT /meter_data/{meter_data_id}`
+      
+      - Updates an existing record identified by `meter_data_id`.
+        
+      - Expects a JSON body matching `MeterDataRequest`.
 4. **DELETE**
-  - `DELETE /meter_data/{meter_data_id}`
-    - Deletes the record identified by `meter_data_id`.
+    - `DELETE /meter_data/{meter_data_id}`
+      
+      - Deletes the record identified by `meter_data_id`.
 
 ### Mandate Data
 1. **GET**
