@@ -278,4 +278,4 @@ Contributions are welcome! To contribute:
 
 ## Author
 
-:man_technologist: Jorge Jiménez - JorgeAJT
+:man_technologist: Jorge Jiménez - JorgeAJT :weight_lifting_man:
