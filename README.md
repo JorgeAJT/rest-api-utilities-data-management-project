@@ -14,7 +14,7 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
     - Meter Readings
     - Meter Data
     - Mandate Data
-8. Contributions
+9. Contributions
 
 ## Overview
 This project provides a **REST API** to manage data for three main database tables:
@@ -101,6 +101,7 @@ Key files:
 1. **Python 3.x** installed.
 2. **PostgreSQL** (latest version recommended)
 3. **Docker Desktop** (optional, if running PostgreSQL in a container)
+
   - For Docker, a sample command might be:
     ```bash
     docker run -d \
