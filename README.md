@@ -217,21 +217,30 @@ All endpoints return a JSON with a `status_code` and `message` (which can contai
 
 ### Mandate Data
 1. **GET**
-  - `GET /mandate_data/{business_partner_id}`
-    - Retrieves mandate data by `business_partner_id`.
-  - `GET /mandate_data/?business_partner_id={business_partner_id}&mandate_status={mandate_status}&collection_frequency={collection_frequency}`
-    - Filters by `business_partner_id`, `mandate_status`, and optionally by `collection_frequency`.
+    - `GET /mandate_data/{business_partner_id}`
+      
+      - Retrieves mandate data by `business_partner_id`.
+    - `GET /mandate_data/?business_partner_id={business_partner_id}&mandate_status={mandate_status}&collection_frequency={collection_frequency}`
+      - Filters by `business_partner_id`, `mandate_status`, and optionally by `collection_frequency`.
+        
 2. **POST**
-  - `POST /mandate_data/`
-    - Creates a new record in `mandate_data`.
-    - **Important**: `mandate_id` is **not** auto-generated. You must provide it in the request body.
+    - `POST /mandate_data/`
+      
+      - Creates a new record in `mandate_data`.
+        
+      - **Important**: `mandate_id` is **not** auto-generated. You must provide it in the request body.
+        
 3. **PUT**
-  - `PUT /mandate_data/{mandate_id}`
-    - Updates an existing record identified by `mandate_id`.
-    - Also requires `mandate_id` in the `MandateData` object for consistency.
+    - `PUT /mandate_data/{mandate_id}`
+      
+      - Updates an existing record identified by `mandate_id`.
+        
+      - Also requires `mandate_id` in the `MandateData` object for consistency.
+        
 4. **DELETE**
-  - `DELETE /mandate_data/{mandate_id}`
-    - Deletes the record identified by `mandate_id`.
+    - `DELETE /mandate_data/{mandate_id}`
+      
+      - Deletes the record identified by `mandate_id`.
 
 ## Contributing
 
