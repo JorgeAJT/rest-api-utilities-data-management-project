@@ -3,6 +3,7 @@
 This project is a **REST API** built with **FastAPI** to interact with three main tables in a **PostgreSQL** database. A **Docker** container hosts the database, and any HTTP client can be used to test the API.
 
 ## Table of Contents
+
 1. Overview
 2. Technologies
 3. Project Structure
