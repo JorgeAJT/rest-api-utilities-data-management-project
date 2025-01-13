@@ -24,7 +24,7 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
       
     - [Mandate Data](#mandate-data)
       
-8. [Contributions](#contrubitions)
+8. [Contributions](#contributions)
 
 ## Overview
 This project provides a **REST API** to manage data for three main database tables:
@@ -252,7 +252,7 @@ All endpoints return a JSON with a `status_code` and `message` (which can contai
       
       - Deletes the record identified by `mandate_id`.
 
-## Contributing
+## Contributions
 
 Contributions are welcome! To contribute:
 
