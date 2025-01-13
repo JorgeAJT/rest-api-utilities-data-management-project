@@ -157,27 +157,25 @@ Key files:
 
 ## API Usage (Endpoints)
 All endpoints return a JSON with a `status_code` and `message` (which can contain data or error details).
+
 ### Meter Readings
 1. **GET**
+  - `GET /meter_readings/{connection_ean_code}`
+    - Retrieves meter readings filtered by `connection_ean_code`.
+  - `GET /meter_readings/?account_id={account_id}&connection_ean_code={connection_ean_code}`
+    - Filters by `account_id`, `connection_ean_code`, or both.
+2. **POST**
+  - `POST /meter_readings/`
+    - Creates a new record in `meter_readings`.
+    - Expects a JSON body matching `MeterReadingsRequest`.
+3. **PUT**
+  - `PUT /meter_readings/{meter_readings_id}`
+    - Updates an existing record identified by `meter_readings_id`.
+    - Expects a JSON body matching `MeterReadingsRequest`.
+4. **DELETE**
+  - `DELETE /meter_readings/{meter_readings_id}`
+    - Deletes the record identified by `meter_readings_id`.
 
-GET /meter_readings/{connection_ean_code}
-Retrieves meter readings filtered by connection_ean_code.
-GET /meter_readings/?account_id={account_id}&connection_ean_code={connection_ean_code}
-Filters by account_id, connection_ean_code, or both.
-2. POST
-
-POST /meter_readings/
-Creates a new record in meter_readings.
-Expects a JSON body matching MeterReadingsRequest.
-3. PUT
-
-PUT /meter_readings/{meter_readings_id}
-Updates an existing record identified by meter_readings_id.
-Expects a JSON body matching MeterReadingsRequest.
-4. DELETE
-
-DELETE /meter_readings/{meter_readings_id}
-Deletes the record identified by meter_readings_id.
 Meter Data
 1. GET
 
