@@ -102,6 +102,7 @@ Key files:
 1. **Python 3.x** installed.
 2. **PostgreSQL** (latest version recommended)
 3. **Docker Desktop** (optional, if running PostgreSQL in a container)
+
       - For Docker, a sample command might be:
         ```bash
         docker run -d \
@@ -111,7 +112,8 @@ Key files:
           --name my_postgres_container \
           postgres
       - Make sure the credentials and port match what you have in `db_connection.py`.
-4. (Optional) Virtualenv or venv to isolate Python dependencies.
+
+5. (Optional) Virtualenv or venv to isolate Python dependencies.
 
 ## Installation
 
