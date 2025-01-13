@@ -91,10 +91,10 @@ Key files:
 - **src/models/**
   - Contains Pydantic models for data validation and serialization:
     - `response_model.py`: A base `Response` model to standardize responses.
-    - **`brand_enum_model.py`**, **`energy_type_enum.py`**: Enums for brand and energy type fields.
-    - **`meter_readings_model.py`**, **`meter_data_model.py`**, **`mandate_data_model.py`**: Request and response models for each table.
+    - `brand_enum_model.py`, `energy_type_enum.py`: Enums for brand and energy type fields.
+    - `meter_readings_model.py`, `meter_data_model.py`, `mandate_data_model.py`: Request and response models for each table.
 - **src/meter_readings, src/meter_data, src/mandate_data**
-  - Each folder contains 4 files (**`get.py`**, **`post.py`**, **`put.py`**, **`delete.py`**) that implement the respective CRUD operations, plus an **`__init__.py`** that re-exports them as routers.
+  - Each folder contains 4 files (`get.py`, `post.py`, `put.py`, `delete.py`) that implement the respective CRUD operations, plus an `__init__.py` that re-exports them as routers.
 
 ## Prerequisites
 1. **Python 3.x** installed.
@@ -108,7 +108,7 @@ Key files:
       -v my_db_volume:/var/lib/postgresql/data \
       --name my_postgres_container \
       postgres
-  - Make sure the credentials and port match what you have in **`db_connection.py`**.
+  - Make sure the credentials and port match what you have in `db_connection.py`.
 4. (Optional) Virtualenv or venv to isolate Python dependencies.
 
 ## Installation
@@ -126,10 +126,11 @@ Key files:
 3. Install dependencies (if you have a requirements.txt):
     ```bash
     pip install -r requirements.txt
-  Or install manually:
-  ```bash
+    ```
+    Or install manually:
+    ```bash
     pip install fastapi uvicorn psycopg2
-  ```
+    ```
 
 ## Running the Project
 
@@ -152,7 +153,7 @@ Key files:
   ```
 
 ## API Usage (Endpoints)
-All endpoints return a JSON with a **`status_code`** and **`message`** (which can contain data or error details).
+All endpoints return a JSON with a `status_code` and `message` (which can contain data or error details).
 ### Meter Readings
 1. **GET**
 
