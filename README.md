@@ -117,17 +117,17 @@ Key files:
 
 ## Installation
 
-1. Clone the repository:
+1. **Clone the repository**:
     ```bash
     git clone https://github.com/your-username/rest-api-final-project.git
     cd rest-api-final-project
     
-2. (Optional) Create a virtual environment and activate it:
+2. (Optional) **Create a virtual environment** and activate it:
     ```bash
     python -m venv venv
     source venv/bin/activate    # Linux / macOS
     venv\Scripts\activate       # Windows
-3. Install dependencies (if you have a requirements.txt):
+3. **Install dependencies** (if you have a `requirements.txt`):
     ```bash
     pip install -r requirements.txt
     ```
