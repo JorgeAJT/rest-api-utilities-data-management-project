@@ -174,12 +174,14 @@ All endpoints return a JSON with a `status_code` and `message` (which can contai
     - `POST /meter_readings/`
 
       - Creates a new record in `meter_readings`.
+        
       - Expects a JSON body matching `MeterReadingsRequest`.
 
 3. **PUT**
     - `PUT /meter_readings/{meter_readings_id}`
       
       - Updates an existing record identified by `meter_readings_id`.
+        
       - Expects a JSON body matching `MeterReadingsRequest`.
         
 4. **DELETE**
