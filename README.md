@@ -5,12 +5,12 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
 ## Table of Contents
 
 1. [Overview](#overview)
-2. Technologies
-3. Project Structure
-4. Prerequisites
-5. Installation
-6. Running the Project
-7. API Usage (Endpoints)
+2. [Technologies](#technologies)
+3. [Project Structure](#project-structure)
+4. [Prerequisites](#prerequisites)
+5. [Installation](#installation)
+6. [Running the Project](#running-the-project)
+7. [API Usage (Endpoints)](#api-usage-(endpoints))
     - Meter Readings
     - Meter Data
     - Mandate Data
