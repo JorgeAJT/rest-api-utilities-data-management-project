@@ -10,7 +10,7 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
 4. [Prerequisites](#prerequisites)
 5. [Installation](#installation)
 6. [Running the Project](#running-the-project)
-7. [API Usage (Endpoints)](#api-usage-(endpoints))
+7. [API Usage (Endpoints)](#api-usage-endpoints)
     - Meter Readings
     - Meter Data
     - Mandate Data
