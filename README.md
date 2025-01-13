@@ -247,16 +247,21 @@ All endpoints return a JSON with a `status_code` and `message` (which can contai
 Contributions are welcome! To contribute:
 
 1. Fork this repository.
+
 2. Create a new branch for your feature or fix:
     ```bash
     git checkout -b feature/new-feature
+
 3. Make your changes and commit with descriptive messages:
     ```bash
     git commit -m "Add new feature X"
+
 4. Push the branch to your forked repository:
     ```bash
     git push origin feature/new-feature
+
 5. Create a Pull Request to the main branch of this repository.
+
 6. Wait for maintainers to review and provide feedback.
 
 ## Author
