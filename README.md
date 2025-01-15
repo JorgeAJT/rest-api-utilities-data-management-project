@@ -10,7 +10,7 @@ This project is a **REST API** built with **FastAPI** to interact with three mai
 
 3. [Project Structure](#project-structure)
 
-4. [Prerequisites](#prerequisites)
+4. [Requirements](#requirements)
 
 5. [Installation](#installation)
 
@@ -110,7 +110,7 @@ Key files:
 - **src/meter_readings, src/meter_data, src/mandate_data**
   - Each folder contains 4 files (`get.py`, `post.py`, `put.py`, `delete.py`) that implement the respective CRUD operations, plus an `__init__.py` that re-exports them as routers.
 
-## Prerequisites
+## Requirements
 1. **Python 3.x** installed.
 2. **PostgreSQL** (latest version recommended)
 3. **Docker Desktop** (optional, if running PostgreSQL in a container)
@@ -139,13 +139,14 @@ Key files:
     python -m venv venv
     source venv/bin/activate    # Linux / macOS
     venv\Scripts\activate       # Windows
+    
 3. **Install dependencies** (if you have a `requirements.txt`):
     ```bash
     pip install -r requirements.txt
     ```
     Or install manually:
     ```bash
-    pip install fastapi uvicorn psycopg2
+    pip install fastapi uvicorn psycopg2-binary
     ```
 
 ## Running the Project
