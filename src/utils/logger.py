@@ -8,12 +8,10 @@ def setup_logger(name: str, level: int = DEFAULT_LOG_LEVEL, fmt: str = DEFAULT_L
     logger = logging.getLogger(name)
     logger.setLevel(level)
 
-    # Create handler and formatter
-    handler = logging.StreamHandler()  # Send logs to the console
+    handler = logging.StreamHandler()
     handler.setFormatter(logging.Formatter(fmt))
 
-    # Avoid adding duplicate handlers
     if not logger.handlers:
-        logger.addHandler(handler)  # Associate the handler to the logger
+        logger.addHandler(handler)
 
     return logger
