@@ -1,4 +1,4 @@
-# REST API Final Project
+# REST API for Utilities Data Management
 
 This project is a **REST API** built with **FastAPI** to interact with three main tables in a **PostgreSQL** database. A **Docker** container hosts the database, and any HTTP client can be used to test the API.
 
