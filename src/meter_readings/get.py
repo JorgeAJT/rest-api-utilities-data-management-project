@@ -10,7 +10,7 @@ meter_readings_get_router = APIRouter()
 
 
 @meter_readings_get_router.get('/meter_readings/{connection_ean_code}')
-async def get_meter_readings_by_path_params_connection_ean_code(connection_ean_code: str) -> Response:
+async def get_meter_readings_by_path_params(connection_ean_code: str) -> Response:
     try:
         with db_connection() as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
