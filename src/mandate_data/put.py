@@ -20,7 +20,7 @@ async def put_mandate_data(mandate_id: int, mandate_data: MandateData) -> Respon
                     logger.warning(f"No data found for mandate_id: {mandate_id}")
                     return Response(status_code=404, message="mandate_id not found in any mandate_data row")
 
-                values_tuple = tuple(mandate_data.dict().values()) + (mandate_id,)
+                values_tuple = tuple(mandate_data.model_dump().values()) + (mandate_id,)
                 cursor.execute("""
                     UPDATE mandate_data 
                     SET mandate_id = %s, 
@@ -36,8 +36,8 @@ async def put_mandate_data(mandate_id: int, mandate_data: MandateData) -> Respon
                     WHERE mandate_id = %s
                 """, values_tuple)
                 conn.commit()
-                logger.info(f"Successfully updated in mandate_data: {mandate_data.dict()}")
-                return Response(status_code=201, message={"mandate_data": mandate_data.dict()})
+                logger.info(f"Successfully updated in mandate_data: {mandate_data.model_dump()}")
+                return Response(status_code=201, message={"mandate_data": mandate_data.model_dump()})
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return Response(status_code=500, message="An internal error occurred while processing the request")

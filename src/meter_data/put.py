@@ -20,7 +20,7 @@ async def put_meter_data(meter_data_id: int, meter_data_request: MeterDataReques
                     logger.warning(f"No data found for meter_data_id: {meter_data_id}")
                     return Response(status_code=404, message="meter_data_id not found in any meter_data row")
 
-                values_tuple = tuple(meter_data_request.dict().values()) + (meter_data_id,)
+                values_tuple = tuple(meter_data_request.model_dump().values()) + (meter_data_id,)
                 cursor.execute("""
                     UPDATE meter_data 
                     SET meter_number = %s, 
@@ -40,9 +40,9 @@ async def put_meter_data(meter_data_id: int, meter_data_request: MeterDataReques
                     WHERE meter_data_id = %s
                 """, values_tuple)
                 conn.commit()
-                meter_data_response = MeterDataResponse(meter_data_id=meter_data_id, **meter_data_request.dict())
-                logger.info(f"Successfully updated in meter_data: {meter_data_response.dict()}")
-                return Response(status_code=201, message={"meter_data": meter_data_response.dict()})
+                meter_data_response = MeterDataResponse(meter_data_id=meter_data_id, **meter_data_request.model_dump())
+                logger.info(f"Successfully updated in meter_data: {meter_data_response.model_dump()}")
+                return Response(status_code=201, message={"meter_data": meter_data_response.model_dump()})
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return Response(status_code=500, message="An internal error occurred while processing the request")

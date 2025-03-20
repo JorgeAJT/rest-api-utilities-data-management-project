@@ -13,7 +13,7 @@ async def post_meter_readings(meter_readings_request: MeterReadingsRequest) -> R
     try:
         with db_connection() as conn:
             with conn.cursor() as cursor:
-                values_tuple = tuple(meter_readings_request.dict().values())
+                values_tuple = tuple(meter_readings_request.model_dump().values())
                 cursor.execute("""
                     INSERT INTO meter_readings (
                         meter_number, connection_ean_code, account_id, brand, energy_type,
@@ -24,9 +24,9 @@ async def post_meter_readings(meter_readings_request: MeterReadingsRequest) -> R
                 new_id = cursor.fetchone()[0]
                 conn.commit()
                 meter_readings_response = MeterReadingsResponse(meter_readings_id=new_id,
-                                                                **meter_readings_request.dict())
-                logger.info(f"Successfully inserted into meter_readings: {meter_readings_response.dict()}")
-                return Response(status_code=201, message={"meter_readings": meter_readings_response.dict()})
+                                                                **meter_readings_request.model_dump())
+                logger.info(f"Successfully inserted into meter_readings: {meter_readings_response.model_dump()}")
+                return Response(status_code=201, message={"meter_readings": meter_readings_response.model_dump()})
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return Response(status_code=500, message="An internal error occurred while processing the request")
