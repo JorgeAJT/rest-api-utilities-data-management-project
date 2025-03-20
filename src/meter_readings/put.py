@@ -21,20 +21,19 @@ async def put_meter_readings(meter_readings_id: int, meter_readings_request: Met
                     return Response(status_code=404, message="meter_readings_id not found in any meter_readings row")
 
                 values_tuple = tuple(meter_readings_request.model_dump().values()) + (meter_readings_id,)
-                cursor.execute("""
-                    UPDATE meter_readings
-                    SET meter_number = %s, 
-                        connection_ean_code = %s, 
-                        account_id = %s, 
-                        brand = %s, 
-                        energy_type = %s,
-                        reading_date = %s, 
-                        reading_electricity = %s, 
-                        reading_gas = %s, 
-                        rejection = %s, 
-                        validation_status = %s
-                    WHERE meter_readings_id = %s
-                """, values_tuple)
+                cursor.execute("UPDATE meter_readings "
+                               "SET meter_number = %s, "
+                               "connection_ean_code = %s, "
+                               "account_id = %s, "
+                               "brand = %s, "
+                               "energy_type = %s,"
+                               "reading_date = %s, "
+                               "reading_electricity = %s, "
+                               "reading_gas = %s, "
+                               "rejection = %s, "
+                               "validation_status = %s "
+                               "WHERE meter_readings_id = %s"
+                               , values_tuple)
                 conn.commit()
                 meter_readings_response = MeterReadingsResponse(meter_readings_id=meter_readings_id,
                                                                 **meter_readings_request.model_dump())
