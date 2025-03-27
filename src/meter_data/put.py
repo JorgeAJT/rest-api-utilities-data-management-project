@@ -21,24 +21,22 @@ async def put_meter_data(meter_data_id: int, meter_data_request: MeterDataReques
                     return Response(status_code=404, message="meter_data_id not found in any meter_data row")
 
                 values_tuple = tuple(meter_data_request.model_dump().values()) + (meter_data_id,)
-                cursor.execute("""
-                    UPDATE meter_data 
-                    SET meter_number = %s, 
-                        connection_ean_code = %s, 
-                        business_partner_id = %s, 
-                        brand = %s,
-                        grid_company_code = %s, 
-                        oda_code = %s, 
-                        smart_collectable = %s,
-                        sjv1 = %s, 
-                        sjv2 = %s, 
-                        installation = %s,
-                        division = %s,
-                        move_out_date = %s,
-                        row_create_datetime = %s,
-                        move_in_date = %s
-                    WHERE meter_data_id = %s
-                """, values_tuple)
+                cursor.execute("UPDATE meter_data "
+                               "SET meter_number = %s, "
+                               "connection_ean_code = %s, "
+                               "business_partner_id = %s, "
+                               "brand = %s, "
+                               "grid_company_code = %s, "
+                               "oda_code = %s, "
+                               "smart_collectable = %s, "
+                               "sjv1 = %s, sjv2 = %s, "
+                               "installation = %s, "
+                               "division = %s, "
+                               "move_out_date = %s, "
+                               "row_create_datetime = %s, "
+                               "move_in_date = %s "
+                               "WHERE meter_data_id = %s",
+                               values_tuple)
                 conn.commit()
                 meter_data_response = MeterDataResponse(meter_data_id=meter_data_id, **meter_data_request.model_dump())
                 logger.info(f"Successfully updated in meter_data: {meter_data_response.model_dump()}")

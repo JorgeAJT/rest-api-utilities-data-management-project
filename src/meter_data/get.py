@@ -10,7 +10,7 @@ meter_data_get_router = APIRouter()
 
 
 @meter_data_get_router.get('/meter_data/{connection_ean_code}')
-async def get_meter_data_by_path_params_connection_ean_code(connection_ean_code: str) -> Response:
+async def get_meter_data_by_path_params(connection_ean_code: str) -> Response:
     try:
         with db_connection() as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
@@ -29,7 +29,7 @@ async def get_meter_data_by_path_params_connection_ean_code(connection_ean_code:
 
 
 @meter_data_get_router.get('/meter_data/')
-async def get_meter_data_by_some_query_params(
+async def get_meter_data_by_query_params(
         business_partner_id: str = None,
         connection_ean_code: str = None) -> Response:
     try:

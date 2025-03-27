@@ -32,8 +32,8 @@ async def put_meter_readings(meter_readings_id: int, meter_readings_request: Met
                                "reading_gas = %s, "
                                "rejection = %s, "
                                "validation_status = %s "
-                               "WHERE meter_readings_id = %s"
-                               , values_tuple)
+                               "WHERE meter_readings_id = %s",
+                               values_tuple)
                 conn.commit()
                 meter_readings_response = MeterReadingsResponse(meter_readings_id=meter_readings_id,
                                                                 **meter_readings_request.model_dump())

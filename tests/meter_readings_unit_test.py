@@ -9,8 +9,8 @@ from src.models import MeterReadingsRequest
 
 @pytest.fixture
 def db_cursor_mock(mocker):
-    mock_cursor = mocker.MagicMock()
     mock_db = mocker.MagicMock()
+    mock_cursor = mocker.MagicMock()
 
     mock_db.__enter__.return_value = mock_db
     mock_db.cursor.return_value.__enter__.return_value = mock_cursor
