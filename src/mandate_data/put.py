@@ -21,20 +21,18 @@ async def put_mandate_data(mandate_id: int, mandate_data: MandateData) -> Respon
                     return Response(status_code=404, message="mandate_id not found in any mandate_data row")
 
                 values_tuple = tuple(mandate_data.model_dump().values()) + (mandate_id,)
-                cursor.execute("""
-                    UPDATE mandate_data 
-                    SET mandate_id = %s, 
-                        business_partner_id = %s, 
-                        brand = %s, 
-                        mandate_status = %s,
-                        collection_frequency = %s, 
-                        row_update_datetime = %s, 
-                        row_create_datetime = %s,
-                        changed_by = %s, 
-                        collection_type = %s, 
-                        metering_consent = %s
-                    WHERE mandate_id = %s
-                """, values_tuple)
+                cursor.execute("UPDATE mandate_data "
+                               "SET mandate_id = %s, "
+                               "business_partner_id = %s, "
+                               "brand = %s, mandate_status = %s, "
+                               "collection_frequency = %s, "
+                               "row_update_datetime = %s, "
+                               "row_create_datetime = %s, "
+                               "changed_by = %s, "
+                               "collection_type = %s, "
+                               "metering_consent = %s "
+                               "WHERE mandate_id = %s",
+                               values_tuple)
                 conn.commit()
                 logger.info(f"Successfully updated in mandate_data: {mandate_data.model_dump()}")
                 return Response(status_code=201, message={"mandate_data": mandate_data.model_dump()})
