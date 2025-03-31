@@ -20,7 +20,7 @@ def db_cursor_mock(mocker):
 
 @pytest.mark.asyncio
 async def test_get_meter_data_by_path_params(mocker, db_cursor_mock):
-    fake_rows = [
+    expected_rows = [
         {
             "meter_data_id": 2,
             "meter_number": "000000005912273146",
@@ -41,7 +41,7 @@ async def test_get_meter_data_by_path_params(mocker, db_cursor_mock):
     ]
 
     mock_db, mock_cursor = db_cursor_mock
-    mock_cursor.fetchall.return_value = fake_rows
+    mock_cursor.fetchall.return_value = expected_rows
     mocker.patch("src.meter_data.get.db_connection", return_value=mock_db)
 
     connection_ean_code = "871694840015271748"
@@ -50,12 +50,12 @@ async def test_get_meter_data_by_path_params(mocker, db_cursor_mock):
     mock_cursor.execute.assert_called_once_with('SELECT * FROM meter_data WHERE connection_ean_code = %s',
                                                 (connection_ean_code,))
 
-    assert response.model_dump() == {"status_code": 200, "message": {"meter_data": fake_rows}}
+    assert response.model_dump() == {"status_code": 200, "message": {"meter_data": expected_rows}}
 
 
 @pytest.mark.asyncio
 async def test_get_meter_data_by_query_params(mocker, db_cursor_mock):
-    fake_rows = [
+    expected_rows = [
         {
             "meter_data_id": 3,
             "meter_number": "000000000032473417",
@@ -76,7 +76,7 @@ async def test_get_meter_data_by_query_params(mocker, db_cursor_mock):
     ]
 
     mock_db, mock_cursor = db_cursor_mock
-    mock_cursor.fetchall.return_value = fake_rows
+    mock_cursor.fetchall.return_value = expected_rows
     mocker.patch("src.meter_data.get.db_connection", return_value=mock_db)
 
     business_partner_id = "0100000024"
@@ -87,7 +87,7 @@ async def test_get_meter_data_by_query_params(mocker, db_cursor_mock):
                                                 'WHERE business_partner_id = %s AND connection_ean_code = %s',
                                                 (business_partner_id, connection_ean_code))
 
-    assert response.model_dump() == {"status_code": 200, "message": {"meter_data": fake_rows}}
+    assert response.model_dump() == {"status_code": 200, "message": {"meter_data": expected_rows}}
 
 
 @pytest.mark.asyncio

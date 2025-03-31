@@ -20,21 +20,23 @@ def db_cursor_mock(mocker):
 
 @pytest.mark.asyncio
 async def test_get_mandate_data_by_path_params(mocker, db_cursor_mock):
-    fake_rows = [{
-        "mandate_id": 6,
-        "business_partner_id": "0132150941",
-        "brand": "ED",
-        "mandate_status": "R",
-        "collection_frequency": "D",
-        "row_update_datetime": "2020-05-07T21:15:31",
-        "row_create_datetime": "2019-07-02T10:00:00",
-        "changed_by": "SYSTEM",
-        "collection_type": "P4",
-        "metering_consent": "daily_insight"
-    }]
+    expected_rows = [
+        {
+            "mandate_id": 6,
+            "business_partner_id": "0132150941",
+            "brand": "ED",
+            "mandate_status": "R",
+            "collection_frequency": "D",
+            "row_update_datetime": "2020-05-07T21:15:31",
+            "row_create_datetime": "2019-07-02T10:00:00",
+            "changed_by": "SYSTEM",
+            "collection_type": "P4",
+            "metering_consent": "daily_insight"
+        }
+    ]
 
     mock_db, mock_cursor = db_cursor_mock
-    mock_cursor.fetchall.return_value = fake_rows
+    mock_cursor.fetchall.return_value = expected_rows
     mocker.patch("src.mandate_data.get.db_connection", return_value=mock_db)
 
     business_partner_id = "0132150941"
@@ -43,26 +45,28 @@ async def test_get_mandate_data_by_path_params(mocker, db_cursor_mock):
     mock_cursor.execute.assert_called_once_with('SELECT * FROM mandate_data WHERE business_partner_id = %s',
                                                 (business_partner_id,))
 
-    assert response.model_dump() == {"status_code": 200, "message": {"mandate_data": fake_rows}}
+    assert response.model_dump() == {"status_code": 200, "message": {"mandate_data": expected_rows}}
 
 
 @pytest.mark.asyncio
 async def test_get_mandate_data_by_query_params(mocker, db_cursor_mock):
-    fake_rows = [{
-        "mandate_id": 12,
-        "business_partner_id": "0132478707",
-        "brand": "ED",
-        "mandate_status": "R",
-        "collection_frequency": "D",
-        "row_update_datetime": "2020-04-03T00:01:00",
-        "row_create_datetime": "2019-07-30T00:00:00",
-        "changed_by": "SYSTEM",
-        "collection_type": "P4",
-        "metering_consent": "daily_insight"
-    }]
+    expected_rows = [
+        {
+            "mandate_id": 12,
+            "business_partner_id": "0132478707",
+            "brand": "ED",
+            "mandate_status": "R",
+            "collection_frequency": "D",
+            "row_update_datetime": "2020-04-03T00:01:00",
+            "row_create_datetime": "2019-07-30T00:00:00",
+            "changed_by": "SYSTEM",
+            "collection_type": "P4",
+            "metering_consent": "daily_insight"
+        }
+    ]
 
     mock_db, mock_cursor = db_cursor_mock
-    mock_cursor.fetchall.return_value = fake_rows
+    mock_cursor.fetchall.return_value = expected_rows
     mocker.patch("src.mandate_data.get.db_connection", return_value=mock_db)
 
     business_partner_id = "0132150941"
@@ -74,7 +78,7 @@ async def test_get_mandate_data_by_query_params(mocker, db_cursor_mock):
                                                 "AND mandate_status = %s AND collection_frequency = %s",
                                                 (business_partner_id, mandate_status, collection_frequency))
 
-    assert response.model_dump() == {"status_code": 200, "message": {"mandate_data": fake_rows}}
+    assert response.model_dump() == {"status_code": 200, "message": {"mandate_data": expected_rows}}
 
 
 @pytest.mark.asyncio
