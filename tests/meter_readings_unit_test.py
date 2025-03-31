@@ -450,6 +450,7 @@ async def test_delete_meter_readings(mocker, db_cursor_mock):
 
     mock_cursor.execute.assert_any_call('DELETE FROM meter_readings WHERE meter_readings_id = %s',
                                         (meter_readings_id,))
+    mock_db.commit.assert_called_once_with()
 
     assert response_dict["status_code"] == 200
     assert "deleted successfully" in response_dict["message"]
