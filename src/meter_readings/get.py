@@ -52,7 +52,7 @@ async def get_meter_readings_by_query_params(
                 value = cursor.fetchall()
 
                 if not value:
-                    logger.warning("No data found for this request")
+                    logger.warning("Data not found for this request")
                     return Response(status_code=404, message="meter_readings row not found")
 
                 logger.info(f"Data successfully retrieved")
