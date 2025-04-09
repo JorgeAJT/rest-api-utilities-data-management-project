@@ -5,41 +5,18 @@ from src.mandate_data import (
     post_mandate_data, put_mandate_data,
     delete_mandate_data)
 from src.models import MandateData
-
-
-@pytest.fixture
-def db_cursor_mock(mocker):
-    mock_db = mocker.MagicMock()
-    mock_cursor = mocker.MagicMock()
-
-    mock_db.__enter__.return_value = mock_db
-    mock_db.cursor.return_value.__enter__.return_value = mock_cursor
-
-    return mock_db, mock_cursor
+from tests.data import MANDATE_DATA_LIST, MANDATE_DATA_SINGLE
 
 
 @pytest.mark.asyncio
 async def test_get_mandate_data_by_path_params(mocker, db_cursor_mock):
-    expected_rows = [
-        {
-            "mandate_id": 6,
-            "business_partner_id": "0132150941",
-            "brand": "ED",
-            "mandate_status": "R",
-            "collection_frequency": "D",
-            "row_update_datetime": "2020-05-07T21:15:31",
-            "row_create_datetime": "2019-07-02T10:00:00",
-            "changed_by": "SYSTEM",
-            "collection_type": "P4",
-            "metering_consent": "daily_insight"
-        }
-    ]
+    expected_rows = MANDATE_DATA_LIST
 
     mock_db, mock_cursor = db_cursor_mock
     mock_cursor.fetchall.return_value = expected_rows
     mocker.patch("src.mandate_data.get.db_connection", return_value=mock_db)
 
-    business_partner_id = "0132150941"
+    business_partner_id = expected_rows[0]["business_partner_id"]
     response = await get_mandate_data_by_path_params(business_partner_id)
 
     mock_cursor.execute.assert_called_once_with('SELECT * FROM mandate_data WHERE business_partner_id = %s',
@@ -50,28 +27,15 @@ async def test_get_mandate_data_by_path_params(mocker, db_cursor_mock):
 
 @pytest.mark.asyncio
 async def test_get_mandate_data_by_query_params(mocker, db_cursor_mock):
-    expected_rows = [
-        {
-            "mandate_id": 12,
-            "business_partner_id": "0132478707",
-            "brand": "ED",
-            "mandate_status": "R",
-            "collection_frequency": "D",
-            "row_update_datetime": "2020-04-03T00:01:00",
-            "row_create_datetime": "2019-07-30T00:00:00",
-            "changed_by": "SYSTEM",
-            "collection_type": "P4",
-            "metering_consent": "daily_insight"
-        }
-    ]
+    expected_rows = MANDATE_DATA_LIST
 
     mock_db, mock_cursor = db_cursor_mock
     mock_cursor.fetchall.return_value = expected_rows
     mocker.patch("src.mandate_data.get.db_connection", return_value=mock_db)
 
-    business_partner_id = "0132150941"
-    mandate_status = "R"
-    collection_frequency = "D"
+    business_partner_id = expected_rows[0]["business_partner_id"]
+    mandate_status = expected_rows[0]["mandate_status"]
+    collection_frequency = expected_rows[0]["collection_frequency"]
     response = await get_mandate_data_by_query_params(business_partner_id, mandate_status, collection_frequency)
 
     mock_cursor.execute.assert_called_once_with("SELECT * FROM mandate_data WHERE business_partner_id = %s "
@@ -83,18 +47,7 @@ async def test_get_mandate_data_by_query_params(mocker, db_cursor_mock):
 
 @pytest.mark.asyncio
 async def test_post_mandate_data(mocker, db_cursor_mock):
-    request_data = {
-        "mandate_id": 2120025,
-        "business_partner_id": "000000007",
-        "brand": "ED",
-        "mandate_status": "R",
-        "collection_frequency": "D",
-        "row_update_datetime": "2020-05-07T21:15:31",
-        "row_create_datetime": "2019-07-02T10:00:00",
-        "changed_by": "SYSTEM",
-        "collection_type": "P4",
-        "metering_consent": "daily_insight"
-    }
+    request_data = MANDATE_DATA_SINGLE
 
     mandate_data_request = MandateData(**request_data)
 
@@ -115,30 +68,19 @@ async def test_post_mandate_data(mocker, db_cursor_mock):
     mock_db.commit.assert_called_once_with()
 
     assert response.model_dump() == {"status_code": 201,
-                                     "message": {"mandate_data": mandate_data_request.model_dump()}}
+                                     "message": {"mandate_data": [mandate_data_request.model_dump()]}}
 
 
 @pytest.mark.asyncio
 async def test_put_mandate_data(mocker, db_cursor_mock):
-    request_data = {
-        "mandate_id": 2120026,
-        "business_partner_id": "000000008",
-        "brand": "ED",
-        "mandate_status": "R",
-        "collection_frequency": "D",
-        "row_update_datetime": "2020-05-07T21:15:31",
-        "row_create_datetime": "2019-07-02T10:00:00",
-        "changed_by": "SYSTEM",
-        "collection_type": "P4",
-        "metering_consent": "daily_insight"
-    }
+    request_data = MANDATE_DATA_SINGLE
 
     mandate_data_request = MandateData(**request_data)
 
     mock_db, mock_cursor = db_cursor_mock
     mocker.patch("src.mandate_data.put.db_connection", return_value=mock_db)
 
-    mandate_id = 2120025
+    mandate_id = request_data["mandate_id"]
     response = await put_mandate_data(mandate_id, mandate_data_request)
 
     expected_query = ("UPDATE mandate_data "
@@ -159,7 +101,7 @@ async def test_put_mandate_data(mocker, db_cursor_mock):
     mock_db.commit.assert_called_once_with()
 
     assert response.model_dump() == {"status_code": 201,
-                                     "message": {"mandate_data": mandate_data_request.model_dump()}}
+                                     "message": {"mandate_data": [mandate_data_request.model_dump()]}}
 
 
 @pytest.mark.asyncio
@@ -167,7 +109,7 @@ async def test_delete_mandate_data(mocker, db_cursor_mock):
     mock_db, mock_cursor = db_cursor_mock
     mocker.patch("src.mandate_data.delete.db_connection", return_value=mock_db)
 
-    mandate_id = 2120025
+    mandate_id = MANDATE_DATA_SINGLE["mandate_id"]
     response = await delete_mandate_data(mandate_id)
     response_dict = response.model_dump()
 
