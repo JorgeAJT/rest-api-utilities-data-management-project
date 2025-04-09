@@ -6,8 +6,6 @@ from tests.data import METER_READINGS_SINGLE
 
 
 def test_get_meter_readings_path_params(environmental_variables: bool, test_client: TestClient):
-    meter_readings_id = None
-
     try:
         expected_row = METER_READINGS_SINGLE
         meter_readings_id = insert_test_data_into_meter_readings(expected_row)
@@ -44,13 +42,10 @@ def test_get_meter_readings_path_params(environmental_variables: bool, test_clie
         assert "not found" in response_json["message"]
 
     finally:
-        if meter_readings_id is not None:
-            delete_all_test_data("meter_readings")
+        delete_all_test_data("meter_readings")
 
 
 def test_get_meter_readings_query_params(environmental_variables: bool, test_client: TestClient):
-    meter_readings_id = None
-
     try:
         expected_row = METER_READINGS_SINGLE
         meter_readings_id = insert_test_data_into_meter_readings(expected_row)
@@ -94,8 +89,7 @@ def test_get_meter_readings_query_params(environmental_variables: bool, test_cli
         assert "not found" in response_json["message"]
 
     finally:
-        if meter_readings_id is not None:
-            delete_all_test_data("meter_readings")
+        delete_all_test_data("meter_readings")
 
 
 def test_post_meter_readings(environmental_variables: bool, test_client: TestClient):
@@ -125,8 +119,6 @@ def test_post_meter_readings(environmental_variables: bool, test_client: TestCli
 
 
 def test_put_meter_readings(environmental_variables: bool, test_client: TestClient):
-    meter_readings_id = None
-
     try:
         request_data = METER_READINGS_SINGLE
         meter_readings_id = insert_test_data_into_meter_readings(request_data)
@@ -161,8 +153,7 @@ def test_put_meter_readings(environmental_variables: bool, test_client: TestClie
         assert "not found" in response_json["message"]
 
     finally:
-        if meter_readings_id is not None:
-            delete_all_test_data("meter_readings")
+        delete_all_test_data("meter_readings")
 
 
 def test_delete_meter_readings(environmental_variables: bool, test_client: TestClient):

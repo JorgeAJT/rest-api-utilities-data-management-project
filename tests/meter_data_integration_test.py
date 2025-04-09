@@ -6,8 +6,6 @@ from tests.data import METER_DATA_SINGLE
 
 
 def test_get_meter_data_path_params(environmental_variables: bool, test_client: TestClient):
-    meter_data_id = None
-
     try:
         expected_row = METER_DATA_SINGLE
         meter_data_id = insert_test_data_into_meter_data(expected_row)
@@ -47,13 +45,10 @@ def test_get_meter_data_path_params(environmental_variables: bool, test_client: 
         assert "not found" in response_json["message"]
 
     finally:
-        if meter_data_id is not None:
-            delete_all_test_data("meter_data")
+        delete_all_test_data("meter_data")
 
 
 def test_get_meter_data_query_params(environmental_variables: bool, test_client: TestClient):
-    meter_data_id = None
-
     try:
         expected_row = METER_DATA_SINGLE
         meter_data_id = insert_test_data_into_meter_data(expected_row)
@@ -100,8 +95,7 @@ def test_get_meter_data_query_params(environmental_variables: bool, test_client:
         assert "not found" in response_json["message"]
 
     finally:
-        if meter_data_id is not None:
-            delete_all_test_data("meter_data")
+        delete_all_test_data("meter_data")
 
 
 def test_post_meter_data(environmental_variables: bool, test_client: TestClient):
@@ -137,8 +131,6 @@ def test_post_meter_data(environmental_variables: bool, test_client: TestClient)
 
 
 def test_put_meter_data(environmental_variables: bool, test_client: TestClient):
-    meter_data_id = None
-
     try:
         request_data = METER_DATA_SINGLE
         meter_data_id = insert_test_data_into_meter_data(request_data)
@@ -176,8 +168,7 @@ def test_put_meter_data(environmental_variables: bool, test_client: TestClient):
         assert "not found" in response_json["message"]
 
     finally:
-        if meter_data_id is not None:
-            delete_all_test_data("meter_data")
+        delete_all_test_data("meter_data")
 
 
 def test_delete_meter_data(environmental_variables: bool, test_client: TestClient):
