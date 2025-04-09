@@ -17,7 +17,7 @@ async def put_meter_readings(meter_readings_id: int, meter_readings_request: Met
                 value = cursor.fetchone()
 
                 if not value:
-                    logger.warning(f"No data found for meter_readings_id: {meter_readings_id}")
+                    logger.warning(f"Data not found for meter_readings_id: {meter_readings_id}")
                     return Response(status_code=404, message="meter_readings_id not found in any meter_readings row")
 
                 values_tuple = tuple(meter_readings_request.model_dump().values()) + (meter_readings_id,)
@@ -38,7 +38,7 @@ async def put_meter_readings(meter_readings_id: int, meter_readings_request: Met
                 meter_readings_response = MeterReadingsResponse(meter_readings_id=meter_readings_id,
                                                                 **meter_readings_request.model_dump())
                 logger.info(f"Successfully updated in meter_readings: {meter_readings_response.model_dump()}")
-                return Response(status_code=201, message={"meter_readings": meter_readings_response.model_dump()})
+                return Response(status_code=201, message={"meter_readings": [meter_readings_response.model_dump()]})
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return Response(status_code=500, message="An internal error occurred while processing the request")

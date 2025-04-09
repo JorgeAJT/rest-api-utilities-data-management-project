@@ -17,7 +17,7 @@ async def delete_meter_readings(meter_readings_id: int) -> Response:
                 value = cursor.fetchone()
 
                 if not value:
-                    logger.warning(f"No data found for meter_readings_id: {meter_readings_id}")
+                    logger.warning(f"Data not found for meter_readings_id: {meter_readings_id}")
                     return Response(status_code=404, message="meter_readings_id not found in any meter_readings row")
 
                 cursor.execute('DELETE FROM meter_readings WHERE meter_readings_id = %s', (meter_readings_id,))

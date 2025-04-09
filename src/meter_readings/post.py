@@ -24,7 +24,7 @@ async def post_meter_readings(meter_readings_request: MeterReadingsRequest) -> R
                 meter_readings_response = MeterReadingsResponse(meter_readings_id=new_id,
                                                                 **meter_readings_request.model_dump())
                 logger.info(f"Successfully inserted into meter_readings: {meter_readings_response.model_dump()}")
-                return Response(status_code=201, message={"meter_readings": meter_readings_response.model_dump()})
+                return Response(status_code=201, message={"meter_readings": [meter_readings_response.model_dump()]})
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return Response(status_code=500, message="An internal error occurred while processing the request")
