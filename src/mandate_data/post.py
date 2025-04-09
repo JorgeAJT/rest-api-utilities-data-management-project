@@ -22,7 +22,7 @@ async def post_mandate_data(mandate_data: MandateData) -> Response:
                                values_tuple)
                 conn.commit()
                 logger.info(f"Successfully inserted into mandate_data: {mandate_data.model_dump()}")
-                return Response(status_code=201, message={"mandate_data": mandate_data.model_dump()})
+                return Response(status_code=201, message={"mandate_data": [mandate_data.model_dump()]})
     except Exception as e:
         logger.error(f"An error occurred: {e}")
         return Response(status_code=500, message="An internal error occurred while processing the request")
