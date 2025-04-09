@@ -5,46 +5,18 @@ from src.meter_data import (
     post_meter_data, put_meter_data,
     delete_meter_data)
 from src.models import MeterDataRequest
-
-
-@pytest.fixture
-def db_cursor_mock(mocker):
-    mock_db = mocker.MagicMock()
-    mock_cursor = mocker.MagicMock()
-
-    mock_db.__enter__.return_value = mock_db
-    mock_db.cursor.return_value.__enter__.return_value = mock_cursor
-
-    return mock_db, mock_cursor
+from tests.data import METER_DATA_LIST, METER_DATA_SINGLE
 
 
 @pytest.mark.asyncio
 async def test_get_meter_data_by_path_params(mocker, db_cursor_mock):
-    expected_rows = [
-        {
-            "meter_data_id": 2,
-            "meter_number": "000000005912273146",
-            "connection_ean_code": "871694840015271748",
-            "business_partner_id": "0100000022",
-            "brand": "ES",
-            "grid_company_code": "8716948000003",
-            "oda_code": "8712423026766",
-            "smart_collectable": "1",
-            "sjv1": 301.0,
-            "sjv2": None,
-            "installation": "0801225660",
-            "division": "02",
-            "move_out_date": "2024-10-27T00:00:00",
-            "row_create_datetime": "2024-08-09T07:38:07",
-            "move_in_date": "2022-01-21T00:00:00"
-        }
-    ]
+    expected_rows = METER_DATA_LIST
 
     mock_db, mock_cursor = db_cursor_mock
     mock_cursor.fetchall.return_value = expected_rows
     mocker.patch("src.meter_data.get.db_connection", return_value=mock_db)
 
-    connection_ean_code = "871694840015271748"
+    connection_ean_code = expected_rows[0]["connection_ean_code"]
     response = await get_meter_data_by_path_params(connection_ean_code)
 
     mock_cursor.execute.assert_called_once_with('SELECT * FROM meter_data WHERE connection_ean_code = %s',
@@ -55,32 +27,14 @@ async def test_get_meter_data_by_path_params(mocker, db_cursor_mock):
 
 @pytest.mark.asyncio
 async def test_get_meter_data_by_query_params(mocker, db_cursor_mock):
-    expected_rows = [
-        {
-            "meter_data_id": 3,
-            "meter_number": "000000000032473417",
-            "connection_ean_code": "871694840008930232",
-            "business_partner_id": "0100000024",
-            "brand": "ES",
-            "grid_company_code": "8716948000003",
-            "oda_code": "8712423026766",
-            "smart_collectable": "1",
-            "sjv1": 1313.0,
-            "sjv2": 982.0,
-            "installation": "0801859418",
-            "division": "01",
-            "move_out_date": "9999-12-31T00:00:00",
-            "row_create_datetime": "2024-08-09T07:38:07",
-            "move_in_date": "2015-12-10T00:00:00"
-        }
-    ]
+    expected_rows = METER_DATA_LIST
 
     mock_db, mock_cursor = db_cursor_mock
     mock_cursor.fetchall.return_value = expected_rows
     mocker.patch("src.meter_data.get.db_connection", return_value=mock_db)
 
-    business_partner_id = "0100000024"
-    connection_ean_code = "871694840008930232"
+    business_partner_id = expected_rows[0]["business_partner_id"]
+    connection_ean_code = expected_rows[0]["connection_ean_code"]
     response = await get_meter_data_by_query_params(business_partner_id, connection_ean_code)
 
     mock_cursor.execute.assert_called_once_with('SELECT * FROM meter_data '
@@ -92,22 +46,7 @@ async def test_get_meter_data_by_query_params(mocker, db_cursor_mock):
 
 @pytest.mark.asyncio
 async def test_post_meter_data(mocker, db_cursor_mock):
-    request_data = {
-        "meter_number": "00000000003",
-        "connection_ean_code": "871694840223121111",
-        "business_partner_id": "010000007",
-        "brand": "ES",
-        "grid_company_code": "8716948000003",
-        "oda_code": "8712423026766",
-        "smart_collectable": "1",
-        "sjv1": 1313.0,
-        "sjv2": 982.0,
-        "installation": "0801859418",
-        "division": "01",
-        "move_out_date": "9999-12-31T00:00:00",
-        "row_create_datetime": "2024-08-09T07:38:07",
-        "move_in_date": "2015-12-10T00:00:00"
-    }
+    request_data = METER_DATA_SINGLE
 
     meter_data_request = MeterDataRequest(**request_data)
 
@@ -132,10 +71,12 @@ async def test_post_meter_data(mocker, db_cursor_mock):
     expected_response = {
         "status_code": 201,
         "message": {
-            "meter_data": {
-                "meter_data_id": 90,
-                **meter_data_request.model_dump()
-            }
+            "meter_data": [
+                {
+                    "meter_data_id": 90,
+                    **meter_data_request.model_dump()
+                }
+            ]
         }
     }
 
@@ -144,22 +85,7 @@ async def test_post_meter_data(mocker, db_cursor_mock):
 
 @pytest.mark.asyncio
 async def test_put_meter_data(mocker, db_cursor_mock):
-    request_data = {
-        "meter_number": "000000000000563653",
-        "connection_ean_code": "871694840007526085",
-        "business_partner_id": "0100000314",
-        "brand": "ES",
-        "grid_company_code": "8716948000003",
-        "oda_code": "8712423026766",
-        "smart_collectable": "1",
-        "sjv1": 2448.0,
-        "sjv2": 1404.0,
-        "installation": "0801225258",
-        "division": "01",
-        "move_out_date": "9999-12-31T00:00:00",
-        "row_create_datetime": "2024-08-09T07:38:07",
-        "move_in_date": "2009-12-17T00:00:00"
-    }
+    request_data = METER_DATA_SINGLE
 
     meter_data_request = MeterDataRequest(**request_data)
 
@@ -193,11 +119,14 @@ async def test_put_meter_data(mocker, db_cursor_mock):
     expected_response = {
         "status_code": 201,
         "message": {
-            "meter_data": {
-                "meter_data_id": meter_data_id,
-                **meter_data_request.model_dump()
-            }
+            "meter_data": [
+                {
+                    "meter_data_id": meter_data_id,
+                    **meter_data_request.model_dump()
+                }
+            ]
         }
+
     }
 
     assert response.model_dump() == expected_response
