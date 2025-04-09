@@ -1,0 +1,3 @@
+from .meter_readings_samples import METER_READINGS_SINGLE, METER_READINGS_LIST
+from .meter_data_samples import METER_DATA_SINGLE, METER_DATA_LIST
+from .mandate_data_samples import MANDATE_DATA_SINGLE, MANDATE_DATA_LIST
