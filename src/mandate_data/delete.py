@@ -17,7 +17,7 @@ async def delete_mandate_data(mandate_id: int) -> Response:
                 value = cursor.fetchone()
 
                 if not value:
-                    logger.warning(f"No data found for mandate_id: {mandate_id}")
+                    logger.warning(f"Data not found for mandate_id: {mandate_id}")
                     return Response(status_code=404, message="mandate_id not found in any mandate_data row")
 
                 cursor.execute('DELETE FROM mandate_data WHERE mandate_id = %s', (mandate_id,))

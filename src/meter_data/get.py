@@ -10,7 +10,7 @@ meter_data_get_router = APIRouter()
 
 
 @meter_data_get_router.get('/meter_data/{connection_ean_code}')
-async def get_meter_data_by_path_params_connection_ean_code(connection_ean_code: str) -> Response:
+async def get_meter_data_by_path_params(connection_ean_code: str) -> Response:
     try:
         with db_connection() as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cursor:
@@ -18,7 +18,7 @@ async def get_meter_data_by_path_params_connection_ean_code(connection_ean_code:
                 value = cursor.fetchall()
 
                 if not value:
-                    logger.warning(f"No data found for connection_ean_code: {connection_ean_code}")
+                    logger.warning(f"Data not found for connection_ean_code: {connection_ean_code}")
                     return Response(status_code=404, message="connection_ean_code not found in any meter_data row")
 
                 logger.info(f"Data successfully retrieved for connection_ean_code: {connection_ean_code}")
@@ -29,7 +29,7 @@ async def get_meter_data_by_path_params_connection_ean_code(connection_ean_code:
 
 
 @meter_data_get_router.get('/meter_data/')
-async def get_meter_data_by_some_query_params(
+async def get_meter_data_by_query_params(
         business_partner_id: str = None,
         connection_ean_code: str = None) -> Response:
     try:
@@ -52,7 +52,7 @@ async def get_meter_data_by_some_query_params(
                 value = cursor.fetchall()
 
                 if not value:
-                    logger.warning("No data found for this request")
+                    logger.warning("Data not found for this request")
                     return Response(status_code=404, message="meter_data row not found")
 
                 logger.info(f"Data successfully retrieved")

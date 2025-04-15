@@ -18,7 +18,7 @@ async def get_mandate_data_by_path_params(business_partner_id: str) -> Response:
                 value = cursor.fetchall()
 
                 if not value:
-                    logger.warning(f"No data found for business_partner_id: {business_partner_id}")
+                    logger.warning(f"Data not found for business_partner_id: {business_partner_id}")
                     return Response(status_code=404, message="business_partner_id not found in any mandate_data row")
 
                 logger.info(f"Data successfully retrieved for business_partner_id: {business_partner_id}")
@@ -29,7 +29,7 @@ async def get_mandate_data_by_path_params(business_partner_id: str) -> Response:
 
 
 @mandate_data_get_router.get('/mandate_data/')
-async def get_mandate_data_by_some_query_params(
+async def get_mandate_data_by_query_params(
         business_partner_id: str,
         mandate_status: str,
         collection_frequency: str = None) -> Response:
@@ -47,7 +47,7 @@ async def get_mandate_data_by_some_query_params(
                 value = cursor.fetchall()
 
                 if not value:
-                    logger.warning(f"No data found for this request")
+                    logger.warning(f"Data not found for this request")
                     return Response(status_code=404, message="mandate_data row not found")
 
                 logger.info(f"Data successfully retrieved")

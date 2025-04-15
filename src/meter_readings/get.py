@@ -18,7 +18,7 @@ async def get_meter_readings_by_path_params(connection_ean_code: str) -> Respons
                 value = cursor.fetchall()
 
                 if not value:
-                    logger.warning(f"No data found for connection_ean_code: {connection_ean_code}")
+                    logger.warning(f"Data not found for connection_ean_code: {connection_ean_code}")
                     return Response(status_code=404, message="connection_ean_code not found in any meter_readings row")
 
                 logger.info(f"Data successfully retrieved for connection_ean_code: {connection_ean_code}")
@@ -52,8 +52,8 @@ async def get_meter_readings_by_query_params(
                 value = cursor.fetchall()
 
                 if not value:
-                    logger.warning("No data found for this request")
-                    return Response(status_code=404, message="meter_data row not found")
+                    logger.warning("Data not found for this request")
+                    return Response(status_code=404, message="meter_readings row not found")
 
                 logger.info(f"Data successfully retrieved")
                 return Response(status_code=200, message={"meter_readings": value})
