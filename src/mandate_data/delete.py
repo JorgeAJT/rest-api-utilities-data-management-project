@@ -1,14 +1,21 @@
 from fastapi import APIRouter
 
 from src.models import Response
-from src.utils import setup_logger, db_connection
+from src.utils import setup_logger, db_connection, COMMON_RESPONSES_DELETE
 
 logger = setup_logger('mandate-data-delete')
 
-mandate_data_delete_router = APIRouter()
+mandate_data_delete_router = APIRouter(
+  prefix="/mandate_data",
+  tags=["mandate_data"],
+)
 
 
-@mandate_data_delete_router.delete('/mandate_data/{mandate_id}')
+@mandate_data_delete_router.delete(
+    '/{mandate_id}',
+    response_model=Response,
+    responses=COMMON_RESPONSES_DELETE
+)
 async def delete_mandate_data(mandate_id: int) -> Response:
     try:
         with db_connection() as conn:

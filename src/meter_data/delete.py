@@ -1,14 +1,21 @@
 from fastapi import APIRouter
 
 from src.models import Response
-from src.utils import setup_logger, db_connection
+from src.utils import setup_logger, db_connection, COMMON_RESPONSES_DELETE
 
 logger = setup_logger('meter-data-delete')
 
-meter_data_delete_router = APIRouter()
+meter_data_delete_router = APIRouter(
+  prefix="/meter_data",
+  tags=["meter_data"],
+)
 
 
-@meter_data_delete_router.delete('/meter_data/{meter_data_id}')
+@meter_data_delete_router.delete(
+    '/{meter_data_id}',
+    response_model=Response,
+    responses=COMMON_RESPONSES_DELETE
+)
 async def delete_meter_data(meter_data_id: int) -> Response:
     try:
         with db_connection() as conn:

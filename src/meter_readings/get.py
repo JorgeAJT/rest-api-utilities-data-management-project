@@ -2,14 +2,21 @@ from fastapi import APIRouter
 from psycopg2.extras import RealDictCursor
 
 from src.models import Response
-from src.utils import setup_logger, db_connection
+from src.utils import setup_logger, db_connection, COMMON_RESPONSES_GENERIC
 
 logger = setup_logger('meter-readings-get')
 
-meter_readings_get_router = APIRouter()
+meter_readings_get_router = APIRouter(
+  prefix="/meter_readings",
+  tags=["meter_readings"],
+)
 
 
-@meter_readings_get_router.get('/meter_readings/{connection_ean_code}')
+@meter_readings_get_router.get(
+    '/{connection_ean_code}',
+    response_model=Response,
+    responses=COMMON_RESPONSES_GENERIC
+)
 async def get_meter_readings_by_path_params(connection_ean_code: str) -> Response:
     try:
         with db_connection() as conn:
@@ -28,7 +35,11 @@ async def get_meter_readings_by_path_params(connection_ean_code: str) -> Respons
         return Response(status_code=500, message="An internal error occurred while processing the request")
 
 
-@meter_readings_get_router.get('/meter_readings/')
+@meter_readings_get_router.get(
+    '/',
+    response_model=Response,
+    responses=COMMON_RESPONSES_GENERIC
+)
 async def get_meter_readings_by_query_params(
         account_id: str = None,
         connection_ean_code: str = None) -> Response:

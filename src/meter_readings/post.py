@@ -1,14 +1,21 @@
 from fastapi import APIRouter
 
 from src.models import Response, MeterReadingsResponse, MeterReadingsRequest
-from src.utils import setup_logger, db_connection
+from src.utils import setup_logger, db_connection, COMMON_RESPONSES_GENERIC
 
 logger = setup_logger('meter-readings-post')
 
-meter_readings_post_router = APIRouter()
+meter_readings_post_router = APIRouter(
+  prefix="/meter_readings",
+  tags=["meter_readings"],
+)
 
 
-@meter_readings_post_router.post('/meter_readings/')
+@meter_readings_post_router.post(
+    '/',
+    response_model=Response,
+    responses=COMMON_RESPONSES_GENERIC
+)
 async def post_meter_readings(meter_readings_request: MeterReadingsRequest) -> Response:
     try:
         with db_connection() as conn:

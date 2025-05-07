@@ -1,14 +1,21 @@
 from fastapi import APIRouter
 
 from src.models import Response, MandateData
-from src.utils import setup_logger, db_connection
+from src.utils import setup_logger, db_connection, COMMON_RESPONSES_GENERIC
 
 logger = setup_logger('mandate-data-put')
 
-mandate_data_put_router = APIRouter()
+mandate_data_put_router = APIRouter(
+  prefix="/mandate_data",
+  tags=["mandate_data"],
+)
 
 
-@mandate_data_put_router.put('/mandate_data/{mandate_id}')
+@mandate_data_put_router.put(
+    '/{mandate_id}',
+    response_model=Response,
+    responses=COMMON_RESPONSES_GENERIC
+)
 async def put_mandate_data(mandate_id: int, mandate_data: MandateData) -> Response:
     try:
         with db_connection() as conn:

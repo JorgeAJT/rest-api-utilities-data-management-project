@@ -2,14 +2,21 @@ from fastapi import APIRouter
 from psycopg2.extras import RealDictCursor
 
 from src.models import Response
-from src.utils import setup_logger, db_connection
+from src.utils import setup_logger, db_connection, COMMON_RESPONSES_GENERIC
 
 logger = setup_logger('mandate-data-get')
 
-mandate_data_get_router = APIRouter()
+mandate_data_get_router = APIRouter(
+    prefix="/mandate_data",
+    tags=["mandate_data"],
+)
 
 
-@mandate_data_get_router.get('/mandate_data/{business_partner_id}')
+@mandate_data_get_router.get(
+    "/{business_partner_id}",
+    response_model=Response,
+    responses=COMMON_RESPONSES_GENERIC
+)
 async def get_mandate_data_by_path_params(business_partner_id: str) -> Response:
     try:
         with db_connection() as conn:
@@ -28,7 +35,11 @@ async def get_mandate_data_by_path_params(business_partner_id: str) -> Response:
         return Response(status_code=500, message="An internal error occurred while processing the request")
 
 
-@mandate_data_get_router.get('/mandate_data/')
+@mandate_data_get_router.get(
+    "/",
+    response_model=Response,
+    responses=COMMON_RESPONSES_GENERIC,
+)
 async def get_mandate_data_by_query_params(
         business_partner_id: str,
         mandate_status: str,

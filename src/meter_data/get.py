@@ -2,14 +2,21 @@ from fastapi import APIRouter
 from psycopg2.extras import RealDictCursor
 
 from src.models import Response
-from src.utils import setup_logger, db_connection
+from src.utils import setup_logger, db_connection, COMMON_RESPONSES_GENERIC
 
 logger = setup_logger('meter-data-get')
 
-meter_data_get_router = APIRouter()
+meter_data_get_router = APIRouter(
+  prefix="/meter_data",
+  tags=["meter_data"],
+)
 
 
-@meter_data_get_router.get('/meter_data/{connection_ean_code}')
+@meter_data_get_router.get(
+    '/{connection_ean_code}',
+    response_model=Response,
+    responses=COMMON_RESPONSES_GENERIC
+)
 async def get_meter_data_by_path_params(connection_ean_code: str) -> Response:
     try:
         with db_connection() as conn:
@@ -28,7 +35,11 @@ async def get_meter_data_by_path_params(connection_ean_code: str) -> Response:
         return Response(status_code=500, message="An internal error occurred while processing the request")
 
 
-@meter_data_get_router.get('/meter_data/')
+@meter_data_get_router.get(
+    '/',
+    response_model=Response,
+    responses=COMMON_RESPONSES_GENERIC
+)
 async def get_meter_data_by_query_params(
         business_partner_id: str = None,
         connection_ean_code: str = None) -> Response:
