@@ -1,11 +1,15 @@
 from fastapi.testclient import TestClient
+from main import app
 from tests.utils import (insert_test_data_into_mandate_data,
                          delete_all_test_data, delete_test_data_by_id,
                          get_test_data)
 from tests.data import MANDATE_DATA_SINGLE
 
 
-def test_get_mandate_data_path_params(environmental_variables: bool, test_client: TestClient):
+test_client = TestClient(app, "127.0.0.1:8080")
+
+
+def test_get_mandate_data_path_params(environmental_variables: bool):
     try:
         expected_row = MANDATE_DATA_SINGLE
         insert_test_data_into_mandate_data(expected_row)
@@ -36,7 +40,7 @@ def test_get_mandate_data_path_params(environmental_variables: bool, test_client
         delete_all_test_data("mandate_data")
 
 
-def test_get_mandate_data_query_params(environmental_variables: bool, test_client: TestClient):
+def test_get_mandate_data_query_params(environmental_variables: bool):
     try:
         expected_row = MANDATE_DATA_SINGLE
         insert_test_data_into_mandate_data(expected_row)
@@ -77,7 +81,7 @@ def test_get_mandate_data_query_params(environmental_variables: bool, test_clien
         delete_all_test_data("mandate_data")
 
 
-def test_post_mandate_data(environmental_variables: bool, test_client: TestClient):
+def test_post_mandate_data(environmental_variables: bool):
     try:
         request_data = MANDATE_DATA_SINGLE
         response = test_client.post("/mandate_data/", json=request_data)
@@ -99,7 +103,7 @@ def test_post_mandate_data(environmental_variables: bool, test_client: TestClien
         delete_all_test_data("mandate_data")
 
 
-def test_put_mandate_data(environmental_variables: bool, test_client: TestClient):
+def test_put_mandate_data(environmental_variables: bool):
     try:
         request_data = MANDATE_DATA_SINGLE
         insert_test_data_into_mandate_data(request_data)
@@ -129,7 +133,7 @@ def test_put_mandate_data(environmental_variables: bool, test_client: TestClient
         delete_all_test_data("mandate_data")
 
 
-def test_delete_mandate_data(environmental_variables: bool, test_client: TestClient):
+def test_delete_mandate_data(environmental_variables: bool):
     try:
         data_to_insert = MANDATE_DATA_SINGLE
         insert_test_data_into_mandate_data(data_to_insert)

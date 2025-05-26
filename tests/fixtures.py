@@ -1,7 +1,5 @@
 import pytest
 import os
-from fastapi.testclient import TestClient
-from main import app
 
 
 @pytest.fixture
@@ -24,8 +22,3 @@ def environmental_variables():
     os.environ["port"] = "5433"
 
     return True
-
-
-@pytest.fixture(scope="module")
-def test_client():
-    return TestClient(app, "http://127.0.0.1:8080")

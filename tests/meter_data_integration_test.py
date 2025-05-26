@@ -1,11 +1,15 @@
 from fastapi.testclient import TestClient
+from main import app
 from tests.utils import (insert_test_data_into_meter_data,
                          delete_all_test_data, delete_test_data_by_id,
                          get_test_data)
 from tests.data import METER_DATA_SINGLE
 
 
-def test_get_meter_data_path_params(environmental_variables: bool, test_client: TestClient):
+test_client = TestClient(app, "127.0.0.1:8080")
+
+
+def test_get_meter_data_path_params(environmental_variables: bool):
     try:
         expected_row = METER_DATA_SINGLE
         meter_data_id = insert_test_data_into_meter_data(expected_row)
@@ -48,7 +52,7 @@ def test_get_meter_data_path_params(environmental_variables: bool, test_client: 
         delete_all_test_data("meter_data")
 
 
-def test_get_meter_data_query_params(environmental_variables: bool, test_client: TestClient):
+def test_get_meter_data_query_params(environmental_variables: bool):
     try:
         expected_row = METER_DATA_SINGLE
         meter_data_id = insert_test_data_into_meter_data(expected_row)
@@ -98,7 +102,7 @@ def test_get_meter_data_query_params(environmental_variables: bool, test_client:
         delete_all_test_data("meter_data")
 
 
-def test_post_meter_data(environmental_variables: bool, test_client: TestClient):
+def test_post_meter_data(environmental_variables: bool):
     try:
         request_data = METER_DATA_SINGLE
         response = test_client.post("/meter_data/", json=request_data)
@@ -130,7 +134,7 @@ def test_post_meter_data(environmental_variables: bool, test_client: TestClient)
         delete_all_test_data("meter_data")
 
 
-def test_put_meter_data(environmental_variables: bool, test_client: TestClient):
+def test_put_meter_data(environmental_variables: bool):
     try:
         request_data = METER_DATA_SINGLE
         meter_data_id = insert_test_data_into_meter_data(request_data)
@@ -171,7 +175,7 @@ def test_put_meter_data(environmental_variables: bool, test_client: TestClient):
         delete_all_test_data("meter_data")
 
 
-def test_delete_meter_data(environmental_variables: bool, test_client: TestClient):
+def test_delete_meter_data(environmental_variables: bool):
     try:
         data_to_insert = METER_DATA_SINGLE
         meter_data_id = insert_test_data_into_meter_data(data_to_insert)

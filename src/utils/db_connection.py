@@ -2,6 +2,7 @@ import psycopg2
 import os
 from .logger import setup_logger
 
+
 logger = setup_logger("database")
 
 
