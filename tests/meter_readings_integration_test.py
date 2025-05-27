@@ -1,13 +1,13 @@
 from fastapi.testclient import TestClient
 from main import app
+from tests.fixtures import environmental_variables
 from tests.utils import (insert_test_data_into_meter_readings,
                          delete_all_test_data, delete_test_data_by_id,
                          get_test_data)
 from tests.data import METER_READINGS_SINGLE
 
 
-test_client = TestClient(app, "127.0.0.1:8080")
-
+test_client = TestClient(app)
 
 def test_get_meter_readings_path_params(environmental_variables: bool):
     try:

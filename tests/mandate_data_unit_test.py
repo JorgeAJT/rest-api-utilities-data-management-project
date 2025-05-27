@@ -5,6 +5,7 @@ from src.mandate_data import (
     post_mandate_data, put_mandate_data,
     delete_mandate_data)
 from src.models import MandateData
+from tests.fixtures import db_cursor_mock
 from tests.data import MANDATE_DATA_LIST, MANDATE_DATA_SINGLE
 
 

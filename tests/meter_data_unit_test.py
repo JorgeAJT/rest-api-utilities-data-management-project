@@ -5,6 +5,7 @@ from src.meter_data import (
     post_meter_data, put_meter_data,
     delete_meter_data)
 from src.models import MeterDataRequest
+from tests.fixtures import db_cursor_mock
 from tests.data import METER_DATA_LIST, METER_DATA_SINGLE
 
 

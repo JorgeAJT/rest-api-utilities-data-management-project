@@ -17,8 +17,8 @@ def db_cursor_mock(mocker):
 def environmental_variables():
     os.environ["dbname"] = "testing_db"
     os.environ["user"] = "postgres"
-    os.environ["password"] = "1234"
-    os.environ["host"] = "127.0.0.1"
+    os.environ["password"] = "testing1234"
+    os.environ["host"] = "testing-db"
     os.environ["port"] = "5433"
 
     return True
