@@ -1,6 +1,6 @@
 from src.models import Response
 
-SUCCESS_EXAMPLE_GENERIC = Response.Config.schema_extra["example"]
+SUCCESS_EXAMPLE_GENERIC = Response.model_config["json_schema_extra"]["example"]
 
 SUCCESS_EXAMPLE_DELETE = {
     "status_code": 200,
