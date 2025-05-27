@@ -11,11 +11,11 @@ def db_connection() -> psycopg2.extensions.connection:
         logger.info("Connecting with the db ...")
 
         conn = psycopg2.connect(
-            dbname=os.getenv("dbname", "postgres"),
-            user=os.getenv("user", "postgres"),
-            password=os.getenv("password", "1234"),
-            host=os.getenv("host", "127.0.0.1"),
-            port=os.getenv("port", "5432")
+            dbname=os.getenv("DB_NAME", "users-db"),
+            user=os.getenv("DB_USER", "root"),
+            password=os.getenv("DB_PASSWORD"),
+            host=os.getenv("DB_HOST", "127.0.0.1"),
+            port=os.getenv("DB_PORT", "5432")
         )
         logger.info("Successful connection!")
         return conn
