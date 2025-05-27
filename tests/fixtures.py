@@ -15,10 +15,10 @@ def db_cursor_mock(mocker):
 
 @pytest.fixture(scope="session")
 def environmental_variables():
-    os.environ["dbname"] = "testing_db"
-    os.environ["user"] = "postgres"
-    os.environ["password"] = "testing1234"
-    os.environ["host"] = "testing-db"
-    os.environ["port"] = "5433"
+    os.environ["DB_NAME"] = "testing_db"
+    os.environ["DB_USER"] = "postgres"
+    os.environ["DB_PASSWORD"] = "testing1234"
+    os.environ["DB_HOST"] = "127.0.0.1"
+    os.environ["DB_PORT"] = "5433"
 
     return True
