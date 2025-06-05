@@ -1,4 +1,4 @@
-FROM python:3.12.0 AS builder
+FROM python:3.13.2 AS builder
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
@@ -9,7 +9,7 @@ COPY requirements.txt .
 RUN python -m venv .venv
 RUN .venv/bin/pip install --no-cache-dir -r requirements.txt
 
-FROM python:3.12.0-slim
+FROM python:3.13.2-slim
 
 WORKDIR /app
 
